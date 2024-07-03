@@ -50,6 +50,7 @@ const pessoa = reactive({
   idade: 18,
   email: '',
   senha: '',
+  nascimento: '',
   estado: '',
   cidade: '',
   endereco: '',
@@ -71,13 +72,16 @@ function EnviarDados() {
 }
 </script>
 
+
+
 <template>
   <div class="custom-form">
     <h1>Novo Formulário</h1>
-    <div id="usuario" v-if="show">
+    <div class="usuario" v-if="show">
       <p v-for="(dado, key) of pessoa" :key="key">{{ key }}: {{ dado }}</p>
       <button @click="show = false" class="custom-submit">Voltar</button>
     </div>
+
     <form v-else @submit.prevent="EnviarDados">
       <div class="custom-input-container">
         <label for="nome">Digite seu nome:</label>
@@ -110,6 +114,10 @@ function EnviarDados() {
         />
       </div>
       <div class="custom-input-container">
+        <label for="date">Data de nascimento:</label>
+         <input v-model="pessoa.nascimento" type="date" required>
+      </div>
+    <div class="custom-input-container">
         <label for="idade">Digite sua idade:</label>
         <input type="number" v-model="pessoa.idade" min="18" max="60" required />
       </div>
@@ -152,7 +160,7 @@ function EnviarDados() {
           />
           <label :for="linguagem.tipo">{{ linguagem.tipo }}</label>
         </div>
-      </div>
+      </div>  
       <div class="custom-bio-container">
         <label for="biografia">Faça uma breve autobiografia:</label>
         <textarea v-model="pessoa.biografia"></textarea>
@@ -166,18 +174,19 @@ function EnviarDados() {
 
 <style>
 
+
 .custom-form {
   max-width: 800px;
-  margin: 0 auto;
+  margin: 30px auto 30px auto;
   padding: 20px;
-  background-color: #f0f0f0;
+  background-color: #4e4b4b;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
-  color: #333;
+  color: #ebebeb;
   margin-bottom: 20px;
 }
 
@@ -189,21 +198,24 @@ label {
   display: block;
   font-size: 18px;
   margin-bottom: 5px;
-  color: #555;
+  color: #ebebeb;
 }
 
 input[type='text'],
 input[type='email'],
 input[type='password'],
 input[type='number'],
+input[type='date'],
 textarea,
 select {
   width: 100%;
   padding: 10px;
   font-size: 16px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid #686868;
 }
+
+
 
 .custom-check-container {
   margin-bottom: 15px;
@@ -238,7 +250,7 @@ textarea {
 .custom-submit {
   width: 200px;
   padding: 10px;
-  background-color: #3ebc32;
+  background-color: #000000; 
   color: white;
   border: none;
   border-radius: 5px;
@@ -247,7 +259,13 @@ textarea {
 }
 
 .custom-submit:hover {
-  background-color: #3ea534;
+  background-color: #a7a1a1;
+}
+
+.usuario > p{
+  color: white;
+  padding: 3px;
+  margin-bottom: 10px;
 }
 
 </style>
